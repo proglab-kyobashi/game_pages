@@ -2,18 +2,213 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Pyxel Games</title>
+  <title>Pyxelゲーム集</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 30px 0 10px;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      opacity: 0.7;
+      letter-spacing: 3px;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 0.7; }
+      25%, 75% { opacity: 0.3; }
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    /* ===== カード本体 ===== */
+    .card {
+      position: relative;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      image-rendering: pixelated;
+      transition: transform 0.3s;
+
+      /* 通常時（静止画） */
+      background:
+        linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.85)),
+        var(--bg) center / cover no-repeat;
+    }
+
+    /* hover時（GIF） */
+    .card:hover {
+      transform: scale(1.03);
+      background:
+        linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+        var(--bg-hover) center / cover no-repeat;
+    }
+
+    /* ===== 説明フェードレイヤー ===== */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      padding: 16px;
+      background: rgba(0,0,0,0.6);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(10px);
+    }
+
+    .card:hover .overlay,
+    .card:focus-within .overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .overlay h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .overlay p {
+      font-size: 14px;
+      opacity: 0.85;
+      margin: 0;
+    }
+
+    .hint {
+      margin-top: 8px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+
+    .overlay a {
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: #00ff99;
+      color: #000;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+      align-self: center;
+    }
+
+    .overlay a:active {
+      transform: translateY(3px);
+    }
+
+    /* ===== スマホ対応（常にGIF表示） ===== */
+    @media (hover: none) {
+      .card {
+        background:
+          linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.6)),
+          var(--bg-hover) center / cover no-repeat;
+      }
+
+      .overlay {
+        opacity: 1;
+        transform: translateY(0);
+        background: rgba(0,0,0,0.75);
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Pyxelゲーム集</h1>
-  <ul>
-    <li><a href="action_game/">アクションゲーム</a></li>
-    <li><a href="bgame/">ババ抜き</a></li>
-    <li><a href="kgame/">暗闇迷路</a></li>
-    <li><a href="mgame/">水迷路</a></li>
-    <li><a href="sgame/">シューティングゲーム</a></li>
-    <li><a href="tgame/">神経衰弱</a></li>
-    <li><a href="ygame/">避けるゲーム</a></li>
-  </ul>
+
+<h1>🎮 Pyxelゲーム集</h1>
+<p class="subtitle">SELECT GAME</p>
+
+<div class="games">
+
+  <div class="card"
+       style="--bg:url(images/action.png); --bg-hover:url(images/action.gif);">
+    <div class="overlay">
+      <h2>アクションゲーム</h2>
+      <p>ジャンプしてゴールを目指そう</p>
+      <span class="hint">▶ ENTERで開始</span>
+      <a href="action_game/">START</a>
+    </div>
+  </div>
+
+  <div class="card"
+       style="--bg:url(images/baba.png); --bg-hover:url(images/baba.gif);">
+    <div class="overlay">
+      <h2>ババ抜き</h2>
+      <p>CPUとの心理戦</p>
+      <span class="hint">▶ ENTERで開始</span>
+      <a href="bgame/">START</a>
+    </div>
+  </div>
+
+  <div class="card"
+       style="--bg:url(images/darkmaze.png); --bg-hover:url(images/darkmaze.gif);">
+    <div class="overlay">
+      <h2>暗闇迷路</h2>
+      <p>視界が狭い迷路を探索</p>
+      <span class="hint">▶ ENTERで開始</span>
+      <a href="kgame/">START</a>
+    </div>
+  </div>
+
+  <div class="card"
+       style="--bg:url(images/watermaze.png); --bg-hover:url(images/watermaze.gif);">
+    <div class="overlay">
+      <h2>水迷路</h2>
+      <p>流されないように進め</p>
+      <span class="hint">▶ ENTERで開始</span>
+      <a href="mgame/">START</a>
+    </div>
+  </div>
+
+  <div class="card"
+       style="--bg:url(images/shooting.png); --bg-hover:url(images/shooting.gif);">
+    <div class="overlay">
+      <h2>シューティング</h2>
+      <p>敵を倒して進め</p>
+      <span class="hint">▶ ENTERで開始</span>
+      <a href="sgame/">START</a>
+    </div>
+  </div>
+
+  <div class="card"
+       style="--bg:url(images/memory.png); --bg-hover:url(images/memory.gif);">
+    <div class="overlay">
+      <h2>神経衰弱</h2>
+      <p>記憶力が試される</p>
+      <span class="hint">▶ ENTERで開始</span>
+      <a href="tgame/">START</a>
+    </div>
+  </div>
+
+  <div class="card"
+       style="--bg:url(images/dodge.png); --bg-hover:url(images/dodge.gif);">
+    <div class="overlay">
+      <h2>避けるゲーム</h2>
+      <p>反射神経勝負</p>
+      <span class="hint">▶ ENTERで開始</span>
+      <a href="ygame/">START</a>
+    </div>
+  </div>
+
+</div>
+
 </body>
 </html>
